@@ -96,9 +96,9 @@ common:
     url: https://www.linkedin.com/company/state-farm
   - type: Newsroom
     url: https://newsroom.statefarm.com
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://www.statefarm.com/customer-care/privacy-security/privacy/privacy-policy
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://www.statefarm.com/customer-care/legal-disclaimer
   - type: OpenAPI
     url: openapi/state-farm-insurance-cos-renters-openapi.yml
