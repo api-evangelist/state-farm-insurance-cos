@@ -74,6 +74,10 @@ apis:
       - type: Documentation
         url: https://b2b.statefarm.com/b2b-content/home-auto-lenders/ins-inquiry
 common:
+  - type: VulnerabilityDisclosure
+    url: security/state-farm-insurance-cos-vulnerability-disclosure.yml
+  - type: DomainSecurity
+    url: security/state-farm-insurance-cos-domain-security.yml
   - type: Authentication
     url: authentication/state-farm-insurance-cos-authentication.yml
   - type: OAuthScopes
