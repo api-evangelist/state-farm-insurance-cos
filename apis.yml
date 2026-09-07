@@ -157,3 +157,5 @@ common:
     url: vocabulary/state-farm-insurance-cos-vocabulary.yml
   - type: SpectralRules
     url: rules/state-farm-insurance-cos-rules.yml
+x-parent: state-farm
+x-relationship: product

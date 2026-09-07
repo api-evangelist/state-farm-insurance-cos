@@ -13,6 +13,11 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "state-farm-insurance-cos-coverage-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "state-farm-insurance-cos-policies-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "state-farm-insurance-cos-quotes-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }
