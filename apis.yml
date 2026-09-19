@@ -50,6 +50,12 @@ apis:
   baseURL: https://api.statefarm.com/v1
   tags:
   - Insurance
+  - Partners
+  - Integration
+  - API Gateway
+  - Multi-line
+  tags_raw:
+  - Insurance
   - Partner
   - Integration
   - API Gateway
