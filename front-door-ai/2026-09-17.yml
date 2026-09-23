@@ -1,0 +1,26 @@
+# Front Door AI Index — state-farm-insurance-cos — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: state-farm-insurance-cos
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.statefarm.com
+  final_host: www.statefarm.com
+  ownership: shared
+  owner: state-farm
+  shares_host_with:
+  - state-farm
+  inherited_from: null
+  verdict: silent
+  score: null
+  host_score: 0
+  density: null
+  words: 1024
+  tiers:
+    agentic: 0
+    core: 0
+    model: 0
+  ambiguous: 6
+  top_terms:
+    agent: 6

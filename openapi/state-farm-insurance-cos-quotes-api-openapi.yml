@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: State Farm Insurance Companies Renters Coverage Quotes API
-  description: The State Farm Renters Insurance API enables partner platforms including property management companies, real estate applications, multifamily housing operators, and insurance aggregators to embed State Farm renters insurance quoting and policy issuance directly into their tenant onboarding workflows. State Farm is the number one writer of renters insurance in the United States. This API supports quote requests, coverage selection, policy binding, and policy status retrieval. Renters insurance through State Farm covers personal belongings, liability protection, and additional living expenses. Available in all US states except California, Massachusetts, and Rhode Island.
+  title: State Farm Insurance Companies Renters Quotes API
+  description: The State Farm Renters Insurance API enables partner platforms including property management companies, real estate applications, multifamily housing operators, and insurance aggregators to embed State Farm renters insurance quoting and policy issuance directly into their tenant onboarding workflows.
   version: 1.0.0
   contact:
     name: State Farm Partner Gateway
@@ -90,6 +90,52 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    TenantInfo:
+      type: object
+      required:
+      - firstName
+      - lastName
+      - dateOfBirth
+      description: Tenant/applicant personal information
+      properties:
+        firstName:
+          type: string
+          example: Jane
+        lastName:
+          type: string
+          example: Smith
+        dateOfBirth:
+          type: string
+          format: date
+          example: '1990-03-15'
+        email:
+          type: string
+          format: email
+          example: jane.smith@email.com
+        phone:
+          type: string
+          example: 555-867-5309
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: string
+          description: Error code
+          example: INVALID_STATE
+        message:
+          type: string
+          description: Human-readable error message
+          example: Renters insurance is not available in the requested state.
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
     Address:
       type: object
       required:
@@ -115,6 +161,47 @@ components:
           type: string
           description: ZIP or ZIP+4 postal code
           example: '60601'
+    QuoteResponse:
+      type: object
+      description: Renters insurance quote details
+      properties:
+        quoteId:
+          type: string
+          description: Unique quote identifier
+          example: QT-2026-789456
+        status:
+          type: string
+          description: Quote status
+          enum:
+          - PENDING
+          - READY
+          - ACCEPTED
+          - EXPIRED
+          - DECLINED
+          example: READY
+        annualPremium:
+          type: number
+          format: double
+          description: Annual premium amount in USD
+          example: 186.0
+        monthlyPremium:
+          type: number
+          format: double
+          description: Monthly premium amount in USD
+          example: 15.5
+        coverageSummary:
+          $ref: '#/components/schemas/CoverageSelection'
+        propertyAddress:
+          $ref: '#/components/schemas/Address'
+        validUntil:
+          type: string
+          format: date-time
+          description: Date and time the quote expires
+          example: '2026-05-16T23:59:59Z'
+        quoteNumber:
+          type: string
+          description: Human-readable quote number for reference
+          example: 2026-Q-987654
     CoverageSelection:
       type: object
       description: Renters insurance coverage selections
@@ -162,93 +249,6 @@ components:
           format: date
           description: Desired policy effective date
           example: '2026-06-01'
-    QuoteResponse:
-      type: object
-      description: Renters insurance quote details
-      properties:
-        quoteId:
-          type: string
-          description: Unique quote identifier
-          example: QT-2026-789456
-        status:
-          type: string
-          description: Quote status
-          enum:
-          - PENDING
-          - READY
-          - ACCEPTED
-          - EXPIRED
-          - DECLINED
-          example: READY
-        annualPremium:
-          type: number
-          format: double
-          description: Annual premium amount in USD
-          example: 186.0
-        monthlyPremium:
-          type: number
-          format: double
-          description: Monthly premium amount in USD
-          example: 15.5
-        coverageSummary:
-          $ref: '#/components/schemas/CoverageSelection'
-        propertyAddress:
-          $ref: '#/components/schemas/Address'
-        validUntil:
-          type: string
-          format: date-time
-          description: Date and time the quote expires
-          example: '2026-05-16T23:59:59Z'
-        quoteNumber:
-          type: string
-          description: Human-readable quote number for reference
-          example: 2026-Q-987654
-    Error:
-      type: object
-      description: Error response
-      properties:
-        code:
-          type: string
-          description: Error code
-          example: INVALID_STATE
-        message:
-          type: string
-          description: Human-readable error message
-          example: Renters insurance is not available in the requested state.
-        details:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
-    TenantInfo:
-      type: object
-      required:
-      - firstName
-      - lastName
-      - dateOfBirth
-      description: Tenant/applicant personal information
-      properties:
-        firstName:
-          type: string
-          example: Jane
-        lastName:
-          type: string
-          example: Smith
-        dateOfBirth:
-          type: string
-          format: date
-          example: '1990-03-15'
-        email:
-          type: string
-          format: email
-          example: jane.smith@email.com
-        phone:
-          type: string
-          example: 555-867-5309
   securitySchemes:
     OAuth2:
       type: oauth2

@@ -1,7 +1,9 @@
 ---
 title: '''They''re being so stingy with everything.'' State Farm ...'
 url: https://www.latimes.com/business/story/2025-03-10/state-farm-seeks-emergency-rate-hike-amid-questions-over-finances-fire-response
-date: '2026-05-25'
+published: '2025-03-10'
+date_basis: url-derived
+harvested: '2026-05-25'
 query: '"State Farm Insurance Cos." press release artificial intelligence'
 position: 4
 source: serpapi-google

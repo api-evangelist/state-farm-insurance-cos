@@ -1,7 +1,7 @@
 openapi: 3.2.0
 info:
-  title: State Farm Insurance Companies Renters Coverage Policies API
-  description: The State Farm Renters Insurance API enables partner platforms including property management companies, real estate applications, multifamily housing operators, and insurance aggregators to embed State Farm renters insurance quoting and policy issuance directly into their tenant onboarding workflows. State Farm is the number one writer of renters insurance in the United States. This API supports quote requests, coverage selection, policy binding, and policy status retrieval. Renters insurance through State Farm covers personal belongings, liability protection, and additional living expenses. Available in all US states except California, Massachusetts, and Rhode Island.
+  title: State Farm Insurance Companies Renters Policies API
+  description: The State Farm Renters Insurance API enables partner platforms including property management companies, real estate applications, multifamily housing operators, and insurance aggregators to embed State Farm renters insurance quoting and policy issuance directly into their tenant onboarding workflows.
   version: 1.0.0
   contact:
     name: State Farm Partner Gateway
@@ -90,6 +90,27 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Error:
+      type: object
+      description: Error response
+      properties:
+        code:
+          type: string
+          description: Error code
+          example: INVALID_STATE
+        message:
+          type: string
+          description: Human-readable error message
+          example: Renters insurance is not available in the requested state.
+        details:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
     Address:
       type: object
       required:
@@ -115,6 +136,25 @@ components:
           type: string
           description: ZIP or ZIP+4 postal code
           example: '60601'
+    AdditionalInterest:
+      type: object
+      description: Additional interest party on the policy
+      properties:
+        type:
+          type: string
+          description: Type of additional interest
+          enum:
+          - LANDLORD
+          - PROPERTY_MANAGEMENT
+          - LENDER
+          - OTHER
+          example: LANDLORD
+        name:
+          type: string
+          description: Name of the additional interest party
+          example: Acme Property Management LLC
+        address:
+          $ref: '#/components/schemas/Address'
     CoverageSelection:
       type: object
       description: Renters insurance coverage selections
@@ -226,46 +266,6 @@ components:
           description: Additional interest parties (e.g., landlords, lenders)
           items:
             $ref: '#/components/schemas/AdditionalInterest'
-    Error:
-      type: object
-      description: Error response
-      properties:
-        code:
-          type: string
-          description: Error code
-          example: INVALID_STATE
-        message:
-          type: string
-          description: Human-readable error message
-          example: Renters insurance is not available in the requested state.
-        details:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
-    AdditionalInterest:
-      type: object
-      description: Additional interest party on the policy
-      properties:
-        type:
-          type: string
-          description: Type of additional interest
-          enum:
-          - LANDLORD
-          - PROPERTY_MANAGEMENT
-          - LENDER
-          - OTHER
-          example: LANDLORD
-        name:
-          type: string
-          description: Name of the additional interest party
-          example: Acme Property Management LLC
-        address:
-          $ref: '#/components/schemas/Address'
   securitySchemes:
     OAuth2:
       type: oauth2
